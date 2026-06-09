@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DanzneedmilK Store</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#080808;color:#E8E0D0;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#0D0D0D;border-bottom:1px solid #1E0505;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.08em;color:#E8E0D0;}
+.logo span{color:#CC2222;}
+.logo-sub{font-size:8px;letter-spacing:0.28em;color:#555;font-family:'Share Tech Mono',monospace;margin-top:2px;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-btn{background:transparent;border:1px solid #222;color:#777;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:6px;}
+.nav-btn:hover{border-color:#CC2222;color:#CC2222;}
+.nav-btn.active{border-color:#CC2222;color:#CC2222;background:#110000;}
+.cart-btn{position:relative;}
+.cart-count{position:absolute;top:-7px;right:-7px;background:#CC2222;color:#fff;font-size:9px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.page{display:none;padding:28px;}
+.page.active{display:block;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.06em;color:#E8E0D0;margin-bottom:4px;}
+.mono-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#CC2222;margin-bottom:22px;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.svc-card{background:#0C0C0C;border:1px solid #1A1A1A;padding:18px 16px;cursor:pointer;transition:border-color 0.2s;position:relative;}
+.svc-card:hover{border-color:#552222;}
+.svc-card.selected{border-color:#CC2222;background:#110000;}
+.svc-cat{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:0.16em;color:#CC2222;margin-bottom:6px;}
+.svc-name{font-size:13px;font-weight:600;color:#E8E0D0;margin-bottom:4px;letter-spacing:0.04em;padding-right:32px;}
+.svc-desc{font-size:10px;color:#555;line-height:1.5;margin-bottom:10px;}
+.svc-price{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#E8E0D0;}
+.svc-price span{font-size:11px;color:#555;font-family:'Rajdhani',sans-serif;font-weight:400;}
+.svc-add{position:absolute;top:12px;right:12px;background:#CC2222;border:none;color:#fff;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.svc-add:hover{background:#AA1111;}
+.svc-qty{position:absolute;top:12px;right:10px;display:flex;align-items:center;}
+.svc-qty button{background:#1A0505;border:1px solid #CC2222;color:#CC2222;width:22px;height:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.svc-qty span{background:#110000;border-top:1px solid #CC2222;border-bottom:1px solid #CC2222;color:#E8E0D0;font-size:11px;font-weight:600;width:24px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;}
+.btn-full{width:100%;background:#CC2222;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:13px;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:background 0.2s;}
+.btn-full:hover{background:#AA1111;}
+.btn-full.outline{background:transparent;border:1px solid #333;color:#666;}
+.btn-full.outline:hover{border-color:#CC2222;color:#CC2222;background:transparent;}
+.cart-items{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.cart-item{background:#0C0C0C;border:1px solid #1A1A1A;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ci-info{flex:1;}
+.ci-cat{font-family:'Share Tech Mono',monospace;font-size:8px;color:#CC2222;letter-spacing:0.14em;margin-bottom:3px;}
+.ci-name{font-size:13px;font-weight:600;color:#E8E0D0;}
+.ci-right{display:flex;align-items:center;gap:12px;}
+.ci-qty-ctrl{display:flex;align-items:center;}
+.ci-qty-ctrl button{background:#1A0505;border:1px solid #333;color:#888;width:22px;height:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;}
+.ci-qty-ctrl span{background:#111;border-top:1px solid #333;border-bottom:1px solid #333;color:#E8E0D0;font-size:11px;font-weight:600;width:26px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;}
+.ci-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#E8E0D0;min-width:40px;text-align:right;}
+.ci-del{background:transparent;border:none;color:#333;cursor:pointer;font-size:16px;transition:color 0.2s;}
+.ci-del:hover{color:#CC2222;}
+.cart-summary{background:#0E0E0E;border:1px solid #1A1A1A;padding:16px;margin-bottom:12px;}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12px;color:#777;border-bottom:1px solid #111;}
+.summary-row:last-child{border:none;font-size:15px;color:#E8E0D0;font-weight:600;padding-top:10px;margin-top:4px;}
+.summary-row .price-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#CC2222;}
+.checkout-form{background:#0C0C0C;border:1px solid #1A1A1A;padding:16px;margin-bottom:12px;}
+.form-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#CC2222;margin-bottom:12px;}
+.form-row{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+.form-row label{font-size:10px;color:#666;letter-spacing:0.08em;text-transform:uppercase;}
+.form-row input,.form-row textarea{background:#111;border:1px solid #222;color:#E8E0D0;font-size:12px;padding:9px 10px;font-family:'Rajdhani',sans-serif;outline:none;resize:none;}
+.form-row input:focus,.form-row textarea:focus{border-color:#CC2222;}
+.form-row input::placeholder,.form-row textarea::placeholder{color:#333;}
+.cart-empty{text-align:center;padding:48px 20px;color:#333;}
+.cart-empty i{font-size:40px;display:block;margin-bottom:12px;}
+.cart-empty p{font-size:13px;letter-spacing:0.06em;}
+.login-wrap{max-width:360px;margin:40px auto;}
+.login-box{background:#0C0C0C;border:1px solid #1A1A1A;padding:28px;}
+.login-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.08em;color:#E8E0D0;margin-bottom:2px;}
+.login-logo span{color:#CC2222;}
+.login-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:#555;letter-spacing:0.16em;margin-bottom:24px;}
+.login-err{background:#1A0505;border:1px solid #3A0A0A;color:#CC2222;font-size:11px;padding:8px 12px;margin-bottom:12px;letter-spacing:0.04em;display:none;}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.stat-card{background:#0C0C0C;border:1px solid #1A1A1A;padding:14px 16px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:8px;color:#555;letter-spacing:0.14em;margin-bottom:6px;}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#E8E0D0;line-height:1;}
+.stat-val.red{color:#CC2222;}
+.orders-list{display:flex;flex-direction:column;gap:10px;}
+.order-card{background:#0C0C0C;border:1px solid #1A1A1A;padding:16px;}
+.order-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.order-id{font-family:'Share Tech Mono',monospace;font-size:9px;color:#CC2222;letter-spacing:0.14em;}
+.order-time{font-family:'Share Tech Mono',monospace;font-size:9px;color:#444;}
+.order-name{font-size:14px;font-weight:600;color:#E8E0D0;letter-spacing:0.04em;}
+.order-items-list{display:flex;flex-direction:column;gap:3px;margin:8px 0;}
+.order-item-row{display:flex;justify-content:space-between;font-size:11px;color:#777;padding:4px 0;border-bottom:1px solid #111;}
+.order-item-row:last-child{border:none;}
+.order-note{font-size:10px;color:#555;font-style:italic;padding:6px 0;}
+.order-total-row{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid #1A1A1A;}
+.order-total{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#CC2222;}
+.badge{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;font-family:'Rajdhani',sans-serif;cursor:pointer;border:1px solid;}
+.badge-new{background:#1A0505;color:#CC2222;border-color:#CC2222;}
+.badge-done{background:#041A08;color:#25D366;border-color:#25D366;}
+.wa-small{background:transparent;border:1px solid #25D366;color:#25D366;font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s;}
+.wa-small:hover{background:#25D366;color:#fff;}
+.empty-orders{text-align:center;padding:40px;color:#333;}
+.empty-orders i{font-size:36px;display:block;margin-bottom:10px;}
+.success-wrap{text-align:center;padding:60px 20px;}
+.success-wrap i{font-size:52px;color:#25D366;display:block;margin-bottom:16px;}
+.success-wrap h3{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#E8E0D0;margin-bottom:8px;letter-spacing:0.06em;}
+.success-wrap p{font-size:13px;color:#666;margin-bottom:24px;line-height:1.6;}
+.success-btns{max-width:300px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div>
+    <div class="logo">Danz<span>need</span>milK</div>
+    <div class="logo-sub">WM · CC · Paid Edit</div>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn active" id="btn-shop" onclick="showPage('shop')"><i class="ti ti-layout-grid"></i> Layanan</button>
+    <button class="nav-btn cart-btn" id="btn-cart" onclick="showPage('cart')">
+      <i class="ti ti-shopping-cart"></i> Keranjang
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+    <button class="nav-btn" id="btn-login" onclick="showPage('login')"><i class="ti ti-user"></i> <span id="login-label">Login Owner</span></button>
+  </div>
+</nav>
+
+<div id="page-shop" class="page active">
+  <div class="section-title">Pilih Layanan</div>
+  <div class="mono-label">// Klik + untuk tambah ke keranjang</div>
+  <div class="services-grid" id="services-grid"></div>
+  <button class="btn-full" onclick="showPage('cart')"><i class="ti ti-shopping-cart"></i> Lihat Keranjang</button>
+</div>
+
+<div id="page-cart" class="page">
+  <div class="section-title">Keranjang</div>
+  <div class="mono-label">// Review pesananmu</div>
+  <div id="cart-content"></div>
+</div>
+
+<div id="page-login" class="page">
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="login-logo">Danz<span>need</span>milK</div>
+      <div class="login-sub">// Owner Dashboard Login</div>
+      <div class="login-err" id="login-err">Password salah. Coba lagi.</div>
+      <div class="form-row">
+        <label>Password Owner</label>
+        <input type="password" id="owner-pass" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter')doLogin()"/>
+      </div>
+      <button class="btn-full" onclick="doLogin()"><i class="ti ti-lock"></i> Masuk Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<div id="page-owner" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="section-title">Dashboard Owner</div>
+      <div class="mono-label">// Semua order masuk · Real-time</div>
+    </div>
+    <button class="nav-btn" onclick="doLogout()"><i class="ti ti-logout"></i> Logout</button>
+  </div>
+  <div class="dash-stats">
+    <div class="stat-card"><div class="stat-label">// Total Order</div><div class="stat-val red" id="stat-orders">0</div></div>
+    <div class="stat-card"><div class="stat-label">// Total Item</div><div class="stat-val" id="stat-items">0</div></div>
+    <div class="stat-card"><div class="stat-label">// Total Pendapatan</div><div class="stat-val red" id="stat-revenue">0K</div></div>
+  </div>
+  <div id="orders-wrap"></div>
+</div>
+
+<div id="page-success" class="page">
+  <div class="success-wrap">
+    <i class="ti ti-circle-check"></i>
+    <h3>Order Terkirim!</h3>
+    <p>Order kamu sudah masuk ke Danz.<br>Konfirmasi payment via WhatsApp ya!</p>
+    <div class="success-btns">
+      <button class="btn-full" onclick="window.open('https://wa.me/6288201632769?text=Halo%20Danz%2C%20saya%20sudah%20order%20di%20web%20dan%20mau%20konfirmasi%20payment','_blank')">
+        <i class="ti ti-brand-whatsapp"></i> Konfirmasi ke WA Danz
+      </button>
+      <button class="btn-full outline" onclick="showPage('shop')">Pesan Lagi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SERVICES = [
+  {id:'wm1',cat:'WM Metal',name:'Starter — 1 WM',desc:'1 watermark metal custom, PNG transparan, revisi 1x',price:3},
+  {id:'wm2',cat:'WM Metal',name:'Double — 2 WM + bonus 1',desc:'2 WM custom + 1 bonus gratis, revisi 2x',price:6},
+  {id:'wm3',cat:'WM Metal',name:'Bundle — 5 WM + bonus 2',desc:'5 WM custom + 2 bonus gratis, revisi unlimited',price:10},
+  {id:'cc1',cat:'CC / Coloring',name:'Color Correction',desc:'Coloring sinematik per foto/video, berbagai preset',price:5},
+  {id:'pe1',cat:'Paid Edit',name:'Paid Edit Soft',desc:'Edit ringan, transisi halus, soft aesthetic',price:3},
+  {id:'pe2',cat:'Paid Edit',name:'Paid Edit JJ ML',desc:'Montage & highlight Mobile Legends',price:5},
+  {id:'pe3',cat:'Paid Edit',name:'Paid Edit JJ Lobby FF',desc:'Edit lobby Free Fire cinematic',price:5},
+  {id:'pe4',cat:'Paid Edit',name:'Seleksi Marga / Unit',desc:'Edit seleksi full cinematic & opening epik',price:10},
+  {id:'sub',cat:'Langganan',name:'Langganan Bulanan',desc:'CC 1x gratis + WM sepuasnya + Paid Edit sepuasnya',price:30},
+];
+
+const OWNER_PASS = 'Danz2609';
+let cart = {};
+let orders = [];
+let isOwner = false;
+
+function renderServices() {
+  document.getElementById('services-grid').innerHTML = SERVICES.map(s => {
+    const qty = cart[s.id] ? cart[s.id].qty : 0;
+    return `<div class="svc-card${qty>0?' selected':''}" id="svc-${s.id}">
+      <div class="svc-cat">${s.cat}</div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-desc">${s.desc}</div>
+      <div class="svc-price">${s.price}K <span>/ unit</span></div>
+      ${qty===0
+        ? `<button class="svc-add" onclick="addToCart('${s.id}')"><i class="ti ti-plus"></i></button>`
+        : `<div class="svc-qty">
+            <button onclick="changeQty('${s.id}',-1)"><i class="ti ti-minus" style="font-size:11px"></i></button>
+            <span>${qty}</span>
+            <button onclick="changeQty('${s.id}',1)"><i class="ti ti-plus" style="font-size:11px"></i></button>
+           </div>`}
+    </div>`;
+  }).join('');
+}
+
+function addToCart(id) {
+  const svc = SERVICES.find(s=>s.id===id);
+  if(!svc) return;
+  if(!cart[id]) cart[id]={svc,qty:0};
+  cart[id].qty++;
+  updateCartCount();
+  renderServices();
+}
+
+function changeQty(id, delta) {
+  if(!cart[id]) return;
+  cart[id].qty += delta;
+  if(cart[id].qty<=0) delete cart[id];
+  updateCartCount();
+  renderServices();
+  if(document.getElementById('page-cart').classList.contains('active')) renderCart();
+}
+
+function updateCartCount() {
+  const total = Object.values(cart).reduce((a,b)=>a+b.qty,0);
+  document.getElementById('cart-count').textContent = total;
+}
+
+function renderCart() {
+  const items = Object.values(cart);
+  const wrap = document.getElementById('cart-content');
+  if(!items.length) {
+    wrap.innerHTML = `<div class="cart-empty"><i class="ti ti-shopping-cart"></i><p>Keranjang masih kosong.<br>Pilih layanan dulu!</p></div>
+    <div style="height:12px;"></div>
+    <button class="btn-full outline" onclick="showPage('shop')"><i class="ti ti-arrow-left"></i> Pilih Layanan</button>`;
+    return;
+  }
+  const total = items.reduce((a,b)=>a+(b.svc.price*b.qty),0);
+  wrap.innerHTML = `
+    <div class="cart-items">${items.map(({svc,qty})=>`
+      <div class="cart-item">
+        <div class="ci-info"><div class="ci-cat">${svc.cat}</div><div class="ci-name">${svc.name}</div></div>
+        <div class="ci-right">
+          <div class="ci-qty-ctrl">
+            <button onclick="changeQty('${svc.id}',-1)"><i class="ti ti-minus" style="font-size:11px"></i></button>
+            <span>${qty}</span>
+            <button onclick="changeQty('${svc.id}',1)"><i class="ti ti-plus" style="font-size:11px"></i></button>
+          </div>
+          <div class="ci-price">${svc.price*qty}K</div>
+          <button class="ci-del" onclick="changeQty('${svc.id}',-99)"><i class="ti ti-trash"></i></button>
+        </div>
+      </div>`).join('')}
+    </div>
+    <div class="cart-summary">
+      ${items.map(({svc,qty})=>`<div class="summary-row"><span>${svc.name} x${qty}</span><span>${svc.price*qty}K</span></div>`).join('')}
+      <div class="summary-row"><span>Total</span><span class="price-val">${total}K</span></div>
+    </div>
+    <div class="checkout-form">
+      <div class="form-title">// Info Pembeli</div>
+      <div class="form-row"><label>Nama / Username</label><input type="text" id="buyer-name" placeholder="Nama kamu..."/></div>
+      <div class="form-row"><label>Catatan (opsional)</label><textarea id="buyer-note" rows="2" placeholder="Contoh: WM nama DANZ, gaya gothic..."></textarea></div>
+    </div>
+    <button class="btn-full" onclick="submitOrder()"><i class="ti ti-send"></i> Kirim Order ke Danz</button>
+    <div style="height:8px;"></div>
+    <button class="btn-full outline" onclick="showPage('shop')"><i class="ti ti-arrow-left"></i> Tambah Layanan</button>`;
+}
+
+function submitOrder() {
+  const name = document.getElementById('buyer-name').value.trim();
+  const note = document.getElementById('buyer-note').value.trim();
+  if(!name){ document.getElementById('buyer-name').style.borderColor='#CC2222'; document.getElementById('buyer-name').focus(); return; }
+  const items = Object.values(cart);
+  if(!items.length) return;
+  const total = items.reduce((a,b)=>a+(b.svc.price*b.qty),0);
+  orders.unshift({
+    id:'ORD-'+Date.now().toString().slice(-6),
+    name, note,
+    items: items.map(({svc,qty})=>({name:svc.name,cat:svc.cat,price:svc.price,qty})),
+    total,
+    time: new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}),
+    date: new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'short'}),
+    status:'new'
+  });
+  cart={};
+  updateCartCount();
+  renderServices();
+  showPage('success');
+}
+
+function doLogin() {
+  const pass = document.getElementById('owner-pass').value;
+  const err = document.getElementById('login-err');
+  if(pass===OWNER_PASS) {
+    isOwner=true; err.style.display='none';
+    document.getElementById('login-label').textContent='Owner';
+    document.getElementById('btn-login').classList.add('active');
+    showPage('owner');
+  } else { err.style.display='block'; document.getElementById('owner-pass').value=''; }
+}
+
+function doLogout() {
+  isOwner=false;
+  document.getElementById('login-label').textContent='Login Owner';
+  document.getElementById('btn-login').classList.remove('active');
+  document.getElementById('owner-pass').value='';
+  showPage('shop');
+}
+
+function renderOwner() {
+  const totalItems = orders.reduce((a,o)=>a+o.items.reduce((b,i)=>b+i.qty,0),0);
+  const totalRev = orders.reduce((a,o)=>a+o.total,0);
+  document.getElementById('stat-orders').textContent=orders.length;
+  document.getElementById('stat-items').textContent=totalItems;
+  document.getElementById('stat-revenue').textContent=totalRev+'K';
+  const wrap = document.getElementById('orders-wrap');
+  if(!orders.length) {
+    wrap.innerHTML=`<div class="empty-orders"><i class="ti ti-clipboard-list"></i><p style="font-size:12px;color:#444;letter-spacing:0.06em;">Belum ada order masuk</p></div>`;
+    return;
+  }
+  wrap.innerHTML=`<div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#CC2222;margin-bottom:12px;">// ${orders.length} ORDER MASUK</div>
+  <div class="orders-list">`+orders.map(o=>`
+    <div class="order-card">
+      <div class="order-header"><span class="order-id">${o.id}</span><span class="order-time">${o.date} · ${o.time}</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <div class="order-name"><i class="ti ti-user" style="font-size:13px;margin-right:6px;color:#CC2222;"></i>${o.name}</div>
+        <span class="badge ${o.status==='new'?'badge-new':'badge-done'}" onclick="toggleStatus('${o.id}')">${o.status==='new'?'Baru — Tandai Selesai':'Selesai — Tandai Baru'}</span>
+      </div>
+      <div class="order-items-list">${o.items.map(i=>`<div class="order-item-row"><span>${i.cat} · ${i.name}</span><span>x${i.qty} = ${i.price*i.qty}K</span></div>`).join('')}</div>
+      ${o.note?`<div class="order-note"><i class="ti ti-message" style="font-size:11px;margin-right:4px;"></i>${o.note}</div>`:''}
+      <div class="order-total-row">
+        <div class="order-total">${o.total}K</div>
+        <button class="wa-small" onclick="window.open('https://wa.me/6288201632769?text=Konfirmasi%20order%20${o.id}%20atas%20nama%20${encodeURIComponent(o.name)}','_blank')">
+          <i class="ti ti-brand-whatsapp"></i> Hubungi WA
+        </button>
+      </div>
+    </div>`).join('')+'</div>';
+}
+
+function toggleStatus(id) {
+  const o=orders.find(x=>x.id===id);
+  if(o){o.status=o.status==='new'?'done':'new';renderOwner();}
+}
+
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  if(p==='shop'){document.getElementById('btn-shop').classList.add('active');renderServices();}
+  if(p==='cart'){document.getElementById('btn-cart').classList.add('active');renderCart();}
+  if(p==='login'&&!isOwner){document.getElementById('btn-login').classList.add('active');}
+  if(p==='owner'){document.getElementById('btn-login').classList.add('active');renderOwner();}
+}
+
+renderServices();
+</script>
+</body>
+</html>

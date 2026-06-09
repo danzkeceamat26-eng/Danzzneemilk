@@ -1,0 +1,417 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600&family=Share+Tech+Mono&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.s{background:#080808;color:#E8E0D0;font-family:'Rajdhani',sans-serif;width:100%;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#0D0D0D;border-bottom:1px solid #1E0505;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.08em;color:#E8E0D0;}
+.logo span{color:#CC2222;}
+.logo-sub{font-size:9px;letter-spacing:0.28em;color:#555;font-family:'Share Tech Mono',monospace;margin-top:1px;}
+.nav-tabs{display:flex;gap:4px;}
+.tab{background:transparent;border:1px solid #222;color:#666;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:7px 14px;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s;}
+.tab.active,.tab:hover{border-color:#CC2222;color:#CC2222;background:#110000;}
+.nav-wa{background:#CC2222;color:#fff;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:9px 16px;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;display:flex;align-items:center;gap:6px;}
+.nav-wa:hover{background:#AA1111;}
+
+.hero{padding:44px 28px 36px;border-bottom:1px solid #111;}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;}
+.hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.22em;color:#CC2222;margin-bottom:12px;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:0.95;color:#E8E0D0;margin-bottom:6px;letter-spacing:0.03em;}
+.hero-title span{color:#CC2222;}
+.hero-sub{font-size:12px;color:#555;line-height:1.7;margin-bottom:22px;letter-spacing:0.03em;}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-r{background:#CC2222;color:#fff;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:11px 20px;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;display:flex;align-items:center;gap:6px;}
+.btn-r:hover{background:#AA1111;}
+.btn-o{background:transparent;border:1px solid #333;color:#777;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:11px 20px;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s;}
+.btn-o:hover{border-color:#CC2222;color:#CC2222;}
+
+.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.prev-card{background:#0F0F0F;border:1px solid #1A1A1A;padding:12px;display:flex;flex-direction:column;gap:6px;}
+.prev-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:0.18em;color:#444;}
+.prev-img{height:90px;background:#141414;border:1px solid #1A1A1A;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prev-img i{font-size:22px;color:#333;}
+.prev-img .price-tag{position:absolute;bottom:6px;right:6px;background:#CC2222;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;padding:2px 8px;letter-spacing:0.06em;}
+
+.sec-hd{padding:32px 28px 18px;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid #111;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.06em;color:#E8E0D0;}
+.sec-mono{font-size:9px;letter-spacing:0.2em;color:#CC2222;font-family:'Share Tech Mono',monospace;}
+
+.wm-pkgs{padding:20px 28px 36px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.pkg{background:#0C0C0C;border:1px solid #1A1A1A;padding:20px 16px;position:relative;transition:border-color 0.25s;}
+.pkg:hover{border-color:#CC2222;}
+.pkg.hot{border-color:#CC2222;}
+.pkg-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#CC2222;color:#fff;font-size:8px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:3px 12px;font-family:'Rajdhani',sans-serif;white-space:nowrap;}
+.pkg-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.1em;color:#E8E0D0;margin-bottom:2px;margin-top:6px;}
+.pkg-qty{font-family:'Share Tech Mono',monospace;font-size:9px;color:#CC2222;letter-spacing:0.14em;margin-bottom:12px;}
+.pkg-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#E8E0D0;line-height:1;margin-bottom:3px;}
+.pkg-price span{font-size:14px;color:#555;font-family:'Rajdhani',sans-serif;font-weight:400;}
+.pkg-bonus{font-size:10px;color:#CC2222;font-weight:600;letter-spacing:0.06em;margin-bottom:14px;margin-top:4px;min-height:16px;}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.pkg-feats li{font-size:11px;color:#777;display:flex;align-items:center;gap:6px;letter-spacing:0.03em;}
+.pkg-feats li i{font-size:13px;color:#CC2222;}
+.pkg-btn{width:100%;background:#1A0505;border:1px solid #CC2222;color:#CC2222;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:10px;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s;}
+.pkg-btn:hover,.pkg.hot .pkg-btn{background:#CC2222;color:#fff;}
+
+.cc-section{padding:20px 28px 36px;}
+.cc-inner{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+.cc-card{background:#0C0C0C;border:1px solid #1A1A1A;padding:20px;}
+.cc-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;}
+.cc-price{font-family:'Bebas Neue',sans-serif;font-size:42px;color:#E8E0D0;line-height:1;}
+.cc-per{font-size:13px;color:#555;font-family:'Rajdhani',sans-serif;}
+.cc-desc{font-size:12px;color:#666;line-height:1.6;margin-bottom:16px;letter-spacing:0.03em;}
+.cc-feats{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.cc-feats li{font-size:11px;color:#777;display:flex;align-items:center;gap:6px;}
+.cc-feats li i{font-size:13px;color:#CC2222;}
+.cc-presets{display:flex;flex-direction:column;gap:8px;}
+.preset-row{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#111;border:1px solid #1A1A1A;}
+.preset-name{font-size:11px;color:#999;letter-spacing:0.06em;}
+.preset-dot{width:8px;height:8px;border-radius:50%;}
+
+.paid-section{padding:0 28px 36px;}
+.paid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px;}
+.paid-card{background:#0C0C0C;border:1px solid #1A1A1A;padding:16px;transition:border-color 0.25s;cursor:pointer;}
+.paid-card:hover{border-color:#CC2222;}
+.paid-card.featured{border-color:#440000;}
+.paid-icon{font-size:18px;color:#CC2222;margin-bottom:10px;}
+.paid-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.08em;color:#E8E0D0;margin-bottom:4px;line-height:1.2;}
+.paid-desc{font-size:10px;color:#555;letter-spacing:0.04em;margin-bottom:10px;line-height:1.5;}
+.paid-price{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#E8E0D0;line-height:1;}
+.paid-price span{font-size:12px;color:#555;font-family:'Rajdhani',sans-serif;font-weight:400;}
+
+.sub-banner{margin:0 28px 36px;background:#0E0000;border:2px solid #CC2222;padding:28px 28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;}
+.sub-crown{font-size:28px;color:#CC2222;margin-bottom:8px;}
+.sub-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.22em;color:#CC2222;margin-bottom:6px;}
+.sub-title{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#E8E0D0;letter-spacing:0.04em;margin-bottom:6px;line-height:1;}
+.sub-title span{color:#CC2222;}
+.sub-perks{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sub-perk{font-size:12px;color:#888;display:flex;align-items:center;gap:8px;letter-spacing:0.03em;}
+.sub-perk i{font-size:14px;color:#CC2222;}
+.sub-right{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.sub-price{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#E8E0D0;line-height:1;text-align:center;}
+.sub-price-label{font-size:10px;color:#555;letter-spacing:0.1em;text-align:center;font-family:'Share Tech Mono',monospace;}
+.sub-btn{background:#CC2222;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:12px 24px;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;white-space:nowrap;width:100%;}
+.sub-btn:hover{background:#AA1111;}
+
+.how{padding:0 28px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.step{background:#0A0A0A;border:1px solid #141414;padding:16px 14px;}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#1A0505;line-height:1;margin-bottom:8px;}
+.step-i{font-size:18px;color:#CC2222;margin-bottom:6px;}
+.step-t{font-size:13px;font-weight:600;color:#E8E0D0;letter-spacing:0.06em;margin-bottom:4px;}
+.step-d{font-size:10px;color:#555;line-height:1.6;}
+
+.cta{margin:0 28px 40px;background:#0D0D0D;border:1px solid #222;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.cta-t{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#E8E0D0;margin-bottom:3px;}
+.cta-s{font-size:11px;color:#555;letter-spacing:0.04em;}
+.cta-right{display:flex;flex-direction:column;gap:6px;align-items:flex-end;}
+.wa-btn{background:#25D366;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.wa-btn:hover{background:#1DA851;}
+.tiktok-link{font-family:'Share Tech Mono',monospace;font-size:9px;color:#555;letter-spacing:0.08em;}
+
+.footer{border-top:1px solid #111;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;}
+.f-brand{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.08em;color:#333;}
+.f-brand span{color:#CC2222;}
+.f-copy{font-family:'Share Tech Mono',monospace;font-size:8px;color:#2A2A2A;letter-spacing:0.1em;}
+.f-social{display:flex;gap:14px;}
+.f-social i{font-size:16px;color:#333;cursor:pointer;transition:color 0.2s;}
+.f-social i:hover{color:#CC2222;}
+.divider{height:1px;background:#111;margin:0 28px;}
+</style>
+
+<div class="s">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">DanzneedmilK — Jasa WM, CC, dan Paid Edit</h2>
+
+  <nav class="nav">
+    <div>
+      <div class="logo">Danz<span>need</span>milK</div>
+      <div class="logo-sub">WM Metal · CC · Paid Edit</div>
+    </div>
+    <div class="nav-tabs">
+      <button class="tab active" onclick="scrollTo('wm')">WM</button>
+      <button class="tab" onclick="scrollTo('cc')">CC</button>
+      <button class="tab" onclick="scrollTo('paid')">Paid Edit</button>
+      <button class="tab" onclick="scrollTo('sub')">Langganan</button>
+    </div>
+    <button class="nav-wa" onclick="openLink('https://wa.me/628388746957')">
+      <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Order
+    </button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">// Jasa Edit by Danz · @ergixzy</p>
+        <div class="hero-title">Edit<br><span>Premium</span><br>by Danz</div>
+        <p class="hero-sub">WM Metal custom, Color Correction sinematik, dan Paid Edit untuk semua kebutuhan kontenmu. Cepat, terjangkau, berkualitas.</p>
+        <div class="hero-btns">
+          <button class="btn-r" onclick="openLink('https://wa.me/628388746957')"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Chat WA</button>
+          <button class="btn-o" onclick="document.getElementById('sub-sec').scrollIntoView({behavior:'smooth'})">Lihat Langganan 30K</button>
+        </div>
+      </div>
+      <div class="preview-grid">
+        <div class="prev-card">
+          <div class="prev-label">// WM Metal</div>
+          <div class="prev-img">
+            <i class="ti ti-typography" aria-hidden="true"></i>
+            <div class="price-tag">3K</div>
+          </div>
+        </div>
+        <div class="prev-card">
+          <div class="prev-label">// CC / Coloring</div>
+          <div class="prev-img">
+            <i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>
+            <div class="price-tag">5K</div>
+          </div>
+        </div>
+        <div class="prev-card">
+          <div class="prev-label">// Paid Edit Soft</div>
+          <div class="prev-img">
+            <i class="ti ti-video" aria-hidden="true"></i>
+            <div class="price-tag">3K</div>
+          </div>
+        </div>
+        <div class="prev-card">
+          <div class="prev-label">// Langganan</div>
+          <div class="prev-img" style="background:#110000;">
+            <i class="ti ti-crown" style="color:#CC2222;" aria-hidden="true"></i>
+            <div class="price-tag">30K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="wm-sec">
+    <div class="sec-hd">
+      <h2 class="sec-title">Watermark Metal</h2>
+      <span class="sec-mono">// WM Custom · Tipografi Metal</span>
+    </div>
+    <div class="wm-pkgs">
+      <div class="pkg">
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-qty">01 · Satu WM</div>
+        <div class="pkg-price">3K <span>/ order</span></div>
+        <div class="pkg-bonus" style="color:#333;">—</div>
+        <ul class="pkg-feats">
+          <li><i class="ti ti-check" aria-hidden="true"></i> 1 WM custom</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> Gaya metal/vector</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> File PNG transparan</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> Revisi 1x</li>
+        </ul>
+        <button class="pkg-btn" onclick="openLink('https://wa.me/628388746957?text=Order%20WM%20Starter%201%20unit%203k')">Order Starter</button>
+      </div>
+      <div class="pkg hot">
+        <div class="pkg-badge">Paling Laris</div>
+        <div class="pkg-name">Double</div>
+        <div class="pkg-qty">02 · Dua WM</div>
+        <div class="pkg-price">6K <span>/ order</span></div>
+        <div class="pkg-bonus"><i class="ti ti-gift" aria-hidden="true"></i> Bonus 1 WM gratis!</div>
+        <ul class="pkg-feats">
+          <li><i class="ti ti-check" aria-hidden="true"></i> 2 WM custom</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> +1 WM bonus</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> Gaya metal/vector</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> Revisi 2x</li>
+        </ul>
+        <button class="pkg-btn" onclick="openLink('https://wa.me/628388746957?text=Order%20WM%20Double%202%20unit%206k')">Order Double</button>
+      </div>
+      <div class="pkg">
+        <div class="pkg-name">Bundle</div>
+        <div class="pkg-qty">05 · Lima WM</div>
+        <div class="pkg-price">10K <span>/ order</span></div>
+        <div class="pkg-bonus"><i class="ti ti-gift" aria-hidden="true"></i> Bonus 2 WM gratis!</div>
+        <ul class="pkg-feats">
+          <li><i class="ti ti-check" aria-hidden="true"></i> 5 WM custom</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> +2 WM bonus</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> Gaya metal/vector</li>
+          <li><i class="ti ti-check" aria-hidden="true"></i> Revisi unlimited</li>
+        </ul>
+        <button class="pkg-btn" onclick="openLink('https://wa.me/6288201632769?text=Order%20WM%20Bundle%205%20unit%2010k')">Order Bundle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div id="cc-sec">
+    <div class="sec-hd">
+      <h2 class="sec-title">Color Correction</h2>
+      <span class="sec-mono">// CC · Coloring per Foto/Video</span>
+    </div>
+    <div class="cc-section">
+      <div class="cc-inner">
+        <div class="cc-card">
+          <div class="cc-price-row">
+            <div class="cc-price">5K</div>
+            <div class="cc-per">/ per foto atau video</div>
+          </div>
+          <div class="cc-desc">Color correction & coloring sinematik sesuai preset pilihanmu. Hasil natural, moody, atau bold — tinggal request.</div>
+          <ul class="cc-feats">
+            <li><i class="ti ti-check" aria-hidden="true"></i> Coloring custom per konten</li>
+            <li><i class="ti ti-check" aria-hidden="true"></i> Berbagai preset tersedia</li>
+            <li><i class="ti ti-check" aria-hidden="true"></i> Revisi 1x</li>
+            <li><i class="ti ti-check" aria-hidden="true"></i> Kirim via WhatsApp</li>
+          </ul>
+          <button class="pkg-btn" onclick="openLink('https://wa.me/6288201632769?text=Order%20CC%20Coloring%205k')">Order CC Sekarang</button>
+        </div>
+        <div>
+          <div class="cc-presets">
+            <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#444;margin-bottom:10px;">// Contoh preset tersedia</div>
+            <div class="preset-row">
+              <span class="preset-name">B&W Classic</span>
+              <div class="preset-dot" style="background:#888;"></div>
+            </div>
+            <div class="preset-row">
+              <span class="preset-name">Blue Night</span>
+              <div class="preset-dot" style="background:#3A6EA8;"></div>
+            </div>
+            <div class="preset-row">
+              <span class="preset-name">Purple Glow</span>
+              <div class="preset-dot" style="background:#7B4FA6;"></div>
+            </div>
+            <div class="preset-row">
+              <span class="preset-name">Grain Film</span>
+              <div class="preset-dot" style="background:#888066;"></div>
+            </div>
+            <div class="preset-row">
+              <span class="preset-name">Sepia Tone</span>
+              <div class="preset-dot" style="background:#A0754A;"></div>
+            </div>
+            <div class="preset-row">
+              <span class="preset-name">Dark Moody</span>
+              <div class="preset-dot" style="background:#CC2222;"></div>
+            </div>
+            <div class="preset-row">
+              <span class="preset-name">Soft Warm</span>
+              <div class="preset-dot" style="background:#C8955A;"></div>
+            </div>
+            <div style="font-size:10px;color:#444;margin-top:8px;letter-spacing:0.04em;">+ bisa request preset sendiri</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div id="paid-sec">
+    <div class="sec-hd">
+      <h2 class="sec-title">Paid Edit</h2>
+      <span class="sec-mono">// Edit Video · Reels · Short</span>
+    </div>
+    <div class="paid-section">
+      <div class="paid-grid">
+        <div class="paid-card" onclick="openLink('https://wa.me/628388746957?text=Order%20Paid%20Edit%20Soft%203k')">
+          <div class="paid-icon"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+          <div class="paid-name">Paid Edit Soft</div>
+          <div class="paid-desc">Edit ringan, transisi halus, efek soft aesthetic. Cocok untuk konten daily & foto slideshow.</div>
+          <div class="paid-price">3K <span>/ video</span></div>
+        </div>
+        <div class="paid-card" onclick="openLink('https://wa.me/628388746957?text=Order%20Paid%20Edit%20JJ%20ML%205k')">
+          <div class="paid-icon"><i class="ti ti-device-gamepad-2" aria-hidden="true"></i></div>
+          <div class="paid-name">Paid Edit JJ ML</div>
+          <div class="paid-desc">Edit konten Joystick/gameplay Mobile Legends. Montage, highlight, dan transisi keren.</div>
+          <div class="paid-price">5K <span>/ video</span></div>
+        </div>
+        <div class="paid-card" onclick="openLink('https://wa.me/628388746957?text=Order%20Paid%20Edit%20JJ%20Lobby%20FF%205k')">
+          <div class="paid-icon"><i class="ti ti-device-gamepad" aria-hidden="true"></i></div>
+          <div class="paid-name">Paid Edit JJ Lobby FF</div>
+          <div class="paid-desc">Edit lobby Free Fire dengan Joystick. Efek cinematic, transisi dinamis, coloring keren.</div>
+          <div class="paid-price">5K <span>/ video</span></div>
+        </div>
+        <div class="paid-card featured" onclick="openLink('https://wa.me/628388746957?text=Order%20Paid%20Edit%20Seleksi%20Marga%2FUnit%2010k')">
+          <div class="paid-icon"><i class="ti ti-crown" aria-hidden="true"></i></div>
+          <div class="paid-name">Seleksi Marga / Unit</div>
+          <div class="paid-desc">Edit video seleksi marga atau unit full cinematic. Opening, transisi epik, dan color grading.</div>
+          <div class="paid-price">10K <span>/ video</span></div>
+        </div>
+      </div>
+      <div style="background:#0A0A0A;border:1px solid #1A1A1A;padding:12px 16px;display:flex;align-items:center;gap:10px;">
+        <i class="ti ti-info-circle" style="color:#CC2222;font-size:16px;" aria-hidden="true"></i>
+        <span style="font-size:11px;color:#555;letter-spacing:0.04em;">Semua paid edit bisa request coloring & WM tambahan · Kirim materi via WhatsApp</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="sub-sec">
+    <div class="sec-hd">
+      <h2 class="sec-title">Langganan</h2>
+      <span class="sec-mono">// Paket Bulanan · All-in-One</span>
+    </div>
+    <div class="sub-banner">
+      <div>
+        <div class="sub-label">// Paket Terbaik · Per Bulan</div>
+        <div class="sub-title">Langganan <span>30K</span></div>
+        <div class="sub-perks">
+          <div class="sub-perk"><i class="ti ti-check" aria-hidden="true"></i> CC 1x gratis setiap bulan</div>
+          <div class="sub-perk"><i class="ti ti-infinity" aria-hidden="true"></i> WM Metal sepuasnya</div>
+          <div class="sub-perk"><i class="ti ti-infinity" aria-hidden="true"></i> Paid Edit sepuasnya</div>
+          <div class="sub-perk"><i class="ti ti-star" aria-hidden="true"></i> Prioritas antrian order</div>
+          <div class="sub-perk"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Support langsung via WA</div>
+        </div>
+      </div>
+      <div class="sub-right">
+        <div>
+          <div class="sub-price">30K</div>
+          <div class="sub-price-label">/ bulan</div>
+        </div>
+        <button class="sub-btn" onclick="openLink('https://wa.me/628388746957?text=Halo%20Danz%2C%20saya%20mau%20langganan%2030k%20per%20bulan')">
+          <i class="ti ti-crown" aria-hidden="true"></i> Langganan Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec-hd">
+    <h2 class="sec-title">Cara Order</h2>
+    <span class="sec-mono">// Simple & cepat</span>
+  </div>
+  <div class="how">
+    <div class="step">
+      <div class="step-num">01</div>
+      <i class="ti ti-brand-whatsapp step-i" aria-hidden="true"></i>
+      <div class="step-t">Chat WA</div>
+      <div class="step-d">Hubungi Danz, sebutkan layanan yang kamu mau.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <i class="ti ti-file-text step-i" aria-hidden="true"></i>
+      <div class="step-t">Kirim Brief</div>
+      <div class="step-d">Kirimkan materi & referensi yang kamu inginkan.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <i class="ti ti-credit-card step-i" aria-hidden="true"></i>
+      <div class="step-t">Bayar</div>
+      <div class="step-d">Transfer via QRIS, Dana, atau GoPay.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <i class="ti ti-download step-i" aria-hidden="true"></i>
+      <div class="step-t">Terima File</div>
+      <div class="step-d">Hasil dikirim via WhatsApp, siap dipakai!</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <div class="cta-t">Siap order? Chat langsung sekarang</div>
+      <div class="cta-s">Payment: QRIS · Dana · GoPay · TikTok: @ergixzy</div>
+    </div>
+    <div class="cta-right">
+      <button class="wa-btn" onclick="openLink('https://wa.me/628388746957')">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> +62 838-8746-957
+      </button>
+      <div class="tiktok-link">TikTok: @ergixzy</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="f-brand">Danz<span>need</span>milK</div>
+    <div class="f-copy">© 2026 DanzneedmilK · All rights reserved</div>
+    <div class="f-social">
+      <i class="ti ti-brand-whatsapp" aria-label="WhatsApp"></i>
+      <i class="ti ti-brand-tiktok" aria-label="TikTok"></i>
+    </div>
+  </footer>
+</div>
